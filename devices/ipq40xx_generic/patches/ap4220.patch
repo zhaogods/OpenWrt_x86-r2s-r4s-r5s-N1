@@ -64,17 +64,17 @@ index 07d5c90c441558..d8b6abbb3b087e 100644
  ALLWIFIBOARDS:= \
  	8devices_mango \
 +	alibaba_ap4220 \
- 	aliyun_ap8220 \
  	arcadyan_aw1000 \
  	asus_rt-ax89x \
-@@ -169,6 +170,7 @@ endef
+ 	buffalo_wxr-5950ax12 \
+@@ -155,6 +156,7 @@ endef
  #   board-<devicename>.<qca4019|qca9888|qca9889|qca9984|qca99x0|ipq8074>
  
  $(eval $(call generate-ipq-wifi-package,8devices_mango,8devices Mango))
 +$(eval $(call generate-ipq-wifi-package,alibaba_ap4220,Alibaba AP4220))
- $(eval $(call generate-ipq-wifi-package,aliyun_ap8220,Aliyun AP8220))
  $(eval $(call generate-ipq-wifi-package,arcadyan_aw1000,Arcadyan AW1000))
  $(eval $(call generate-ipq-wifi-package,asus_rt-ax89x,Asus RT-AX89X))
+ $(eval $(call generate-ipq-wifi-package,buffalo_wxr-5950ax12,Buffalo WXR-5950AX12))
 diff --git a/target/linux/ipq40xx/base-files/etc/board.d/02_network b/target/linux/ipq40xx/base-files/etc/board.d/02_network
 index 57dca0e1a2a93a..e26b4aed50b8d1 100644
 --- a/target/linux/ipq40xx/base-files/etc/board.d/02_network
