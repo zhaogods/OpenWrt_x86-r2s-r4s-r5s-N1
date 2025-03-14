@@ -59,14 +59,15 @@ diff --git a/target/linux/mediatek/filogic/base-files/etc/board.d/02_network b/t
 index e9f63938b2d34d..9fb2cb8269499c 100644
 --- a/target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 +++ b/target/linux/mediatek/filogic/base-files/etc/board.d/02_network
-@@ -44,6 +44,7 @@ mediatek_setup_interfaces()
+@@ -42,7 +42,7 @@ mediatek_setup_interfaces()
+ 	asus,tuf-ax4200|\
  	jdcloud,re-cp-03|\
  	mediatek,mt7981-rfb|\
- 	netcore,n60|\
-+	netcore,n60-pro|\
- 	nradio,c8-668gl|\
+-	netcore,n60|\
++	netcore,n60*|\
  	ruijie,rg-x60-pro|\
  	unielec,u7981-01*|\
+ 	zbtlink,zbt-z8102ax|\
 diff --git a/target/linux/mediatek/filogic/base-files/etc/hotplug.d/ieee80211/11_fix_wifi_mac b/target/linux/mediatek/filogic/base-files/etc/hotplug.d/ieee80211/11_fix_wifi_mac
 index 061cbf975c2498..c83b4089c06f6d 100644
 --- a/target/linux/mediatek/filogic/base-files/etc/hotplug.d/ieee80211/11_fix_wifi_mac
@@ -81,18 +82,6 @@ index 061cbf975c2498..c83b4089c06f6d 100644
  		# Originally, phy1 is phy0 mac with LA bit set. However, this would conflict
  		# addresses on multiple VIFs with the other radio. Use label mac to set LA bit.
  		[ "$PHYNBR" = "1" ] && macaddr_setbit_la $(get_mac_label) > /sys${DEVPATH}/macaddress
-diff --git a/target/linux/mediatek/filogic/base-files/lib/upgrade/platform.sh b/target/linux/mediatek/filogic/base-files/lib/upgrade/platform.sh
-index 38019e89e5f655..90be7e56fb5d8b 100755
---- a/target/linux/mediatek/filogic/base-files/lib/upgrade/platform.sh
-+++ b/target/linux/mediatek/filogic/base-files/lib/upgrade/platform.sh
-@@ -82,6 +82,7 @@ platform_do_upgrade() {
- 	nokia,ea0326gmp|\
- 	openwrt,one|\
- 	netcore,n60|\
-+	netcore,n60-pro|\
- 	qihoo,360t7|\
- 	routerich,ax3000-ubootmod|\
- 	tplink,tl-xdr4288|\
 diff --git a/target/linux/mediatek/image/filogic.mk b/target/linux/mediatek/image/filogic.mk
 index a019f50461ceff..3071fc1bdc903d 100644
 --- a/target/linux/mediatek/image/filogic.mk
