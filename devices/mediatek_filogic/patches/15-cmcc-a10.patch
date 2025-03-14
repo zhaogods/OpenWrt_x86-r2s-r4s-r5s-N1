@@ -11,7 +11,7 @@
 
 --- a/target/linux/mediatek/image/filogic.mk
 +++ b/target/linux/mediatek/image/filogic.mk
-@@ -349,6 +349,30 @@ define Device/cetron_ct3003
+@@ -349,6 +349,27 @@ define Device/cetron_ct3003
  endef
  TARGET_DEVICES += cetron_ct3003
  
