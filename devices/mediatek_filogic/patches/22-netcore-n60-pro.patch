@@ -45,12 +45,15 @@ diff --git a/target/linux/mediatek/filogic/base-files/etc/board.d/01_leds b/targ
 index 4e1d10a4dcc196..02781280186286 100644
 --- a/target/linux/mediatek/filogic/base-files/etc/board.d/01_leds
 +++ b/target/linux/mediatek/filogic/base-files/etc/board.d/01_leds
-@@ -70,6 +70,9 @@ mercusys,mr90x-v1-ubi)
+@@ -70,6 +70,12 @@ mercusys,mr90x-v1-ubi)
  netgear,wax220)
  	ucidef_set_led_netdev "eth0" "LAN" "green:lan" "eth0"
  	;;
 +netcore,n60-pro)
++	ucidef_set_led_netdev "wanlink" "WANLINK" "mdio-bus:06:blue:wan" "eth1" "link tx rx"
++	ucidef_set_led_netdev "lan-1" "lan-1" "mdio-bus:05:blue:lan" "lan1" "link tx rx"
 +	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1" "link"
++	ucidef_set_led_netdev "wifi-5g" "WIFI-5G" "blue:wifi5g" "phy0-ap0" "link tx rx"
 +	;;
  nokia,ea0326gmp)
  	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1" "link"
@@ -86,7 +89,7 @@ diff --git a/target/linux/mediatek/image/filogic.mk b/target/linux/mediatek/imag
 index a019f50461ceff..3071fc1bdc903d 100644
 --- a/target/linux/mediatek/image/filogic.mk
 +++ b/target/linux/mediatek/image/filogic.mk
-@@ -1203,6 +1203,24 @@ define Device/netcore_n60
+@@ -1203,6 +1203,23 @@ define Device/netcore_n60
  endef
  TARGET_DEVICES += netcore_n60
  
@@ -99,8 +102,7 @@ index a019f50461ceff..3071fc1bdc903d 100644
 +  BLOCKSIZE := 128k
 +  PAGESIZE := 2048
 +  KERNEL_IN_UBI := 1
-+  DEVICE_PACKAGES := kmod-usb3 kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware \
-+	automount f2fsck mkf2fs
++  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3
 +  IMAGE_SIZE := 112640k
 +  IMAGES += factory.bin
 +  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)

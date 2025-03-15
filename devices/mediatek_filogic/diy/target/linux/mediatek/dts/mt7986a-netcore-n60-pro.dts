@@ -14,10 +14,10 @@
 	aliases {
 		serial0 = &uart0;
 		label-mac-device = &gmac0;
-		led-boot = &sys_status;
-		led-failsafe = &sys_status;
-		led-running = &sys_status;
-		led-upgrade = &sys_status;
+		led-boot = &led_power;
+		led-failsafe = &led_power;
+		led-running = &led_power;
+		led-upgrade = &led_power;
 	};
 
 	chosen {
@@ -49,7 +49,7 @@
 	leds {
 		compatible = "gpio-leds";
 
-		sys_status: status {
+		led_power: power {
 			color = <LED_COLOR_ID_BLUE>;
 			function = LED_FUNCTION_POWER;
 			gpios = <&pio 29 GPIO_ACTIVE_LOW>;
@@ -63,7 +63,7 @@
 
 		mesh {
 			color = <LED_COLOR_ID_BLUE>;
-			function = LED_FUNCTION_STATUS;
+			function = LED_FUNCTION_WPS;
 			gpios = <&pio 31 GPIO_ACTIVE_LOW>;
 		};
 
@@ -91,7 +91,6 @@
 		regulator-boot-on;
 		regulator-always-on;
 	};
-
 };
 
 &crypto {
@@ -140,11 +139,33 @@
 	phy5: phy@5 {
 		compatible = "ethernet-phy-ieee802.3-c45";
 		reg = <5>;
+
+		leds {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			led@3 {
+				reg = <3>;
+				color = <LED_COLOR_ID_BLUE>;
+				function = LED_FUNCTION_LAN;
+			};
+		};
 	};
 	
 	phy6: phy@6 {
 		compatible = "ethernet-phy-ieee802.3-c45";
 		reg = <6>;
+
+		leds {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			led@3 {
+				reg = <3>;
+				color = <LED_COLOR_ID_BLUE>;
+				function = LED_FUNCTION_WAN;
+			};
+		};
 	};
 
 	switch: switch@1f {
@@ -213,7 +234,7 @@
 		spi-max-frequency = <20000000>;
 		spi-tx-bus-width = <4>;
 		spi-rx-bus-width = <4>;
-		
+
 		mediatek,nmbm;
 		mediatek,bmt-max-ratio = <1>;
 		mediatek,bmt-max-reserved-blocks = <64>;
